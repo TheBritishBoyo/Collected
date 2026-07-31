@@ -1,35 +1,25 @@
-import ProductCard from "../components/ProductCard";
-import products from "../data/products";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import TrustBand from "../components/TrustBand";
+import HowItWorks from "../components/HowItWorks";
+import Categories from "../components/Categories";
+import CTASection from "../components/CTASection";
+import Footer from "../components/Footer";
 
 function Home() {
-
-    return (
-
-        <div>
-
-            <h1>
-                Collected
-            </h1>
-
-            <div>
-
-                {
-                    products.map(product => (
-
-                        <ProductCard>
-                            key={product.id}
-                            product={product}
-                        </ProductCard>
-
-                    ))
-                }
-
-            </div>
-
-        </div>
-
-    )
-
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <TrustBand />
+        <HowItWorks />
+        <Categories />
+      </main>
+      <CTASection />
+      <Footer />
+    </>
+  );
 }
 
 export default Home;
