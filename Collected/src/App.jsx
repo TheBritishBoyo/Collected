@@ -1,7 +1,24 @@
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import Browse from "./pages/Browse";
+import About from "./pages/About";
 
 function App() {
-  return <Home />;
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/browse" element={<Browse />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default App;

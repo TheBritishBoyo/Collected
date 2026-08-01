@@ -410,3 +410,172 @@ footer .copyright { font-size: 0.8rem; color: var(--muted); }
   * { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--paper);
+  border-radius: 2px;
+}
+
+@media (max-width: 760px) {
+  .nav-toggle { display: flex; }
+  .nav-mid {
+    position: fixed;
+    top: 73px;
+    left: 0;
+    right: 0;
+    background: var(--ink);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 32px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .nav-mid.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.nav-links a.active {
+  color: var(--paper);
+}
+
+/* Product grid / cards */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.product-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.product-card:hover {
+  border-color: var(--holo-1);
+  transform: translateY(-3px);
+}
+.product-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-family: 'IBM Plex Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pc-category { color: var(--muted); }
+.pc-stock.in { color: var(--holo-3); }
+.pc-stock.low { color: var(--gold); }
+.product-card h3 { font-size: 1.05rem; }
+.pc-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.pc-price {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+.pc-fee { font-size: 0.75rem; color: var(--muted); }
+.pc-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.pc-btn {
+  margin-top: auto;
+  text-align: center;
+  background: none;
+  cursor: pointer;
+}
+
+/* Browse controls */
+.browse-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.browse-search {
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  max-width: 360px;
+}
+.browse-search:focus { border-color: var(--holo-2); }
+.browse-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.chip.active {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+.browse-empty {
+  color: var(--muted);
+  margin-top: 40px;
+}
+
+/* About page */
+.verify-list {
+  list-style: none;
+  display: grid;
+  gap: 28px;
+}
+.verify-list h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+.verify-list p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 60ch;
+}

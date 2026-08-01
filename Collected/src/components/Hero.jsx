@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Hero() {
   return (
     <section className="hero">
@@ -15,7 +17,7 @@ function Hero() {
             in stock.
           </p>
           <div className="hero-actions">
-            <a href="#" className="btn-primary">Start searching</a>
+            <Link to="/browse" className="btn-primary">Start searching</Link>
             <a href="#how" className="btn-secondary">See how it works</a>
           </div>
           <div className="trust-row">
