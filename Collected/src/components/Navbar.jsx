@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   return (
     <header className="site-header">
@@ -28,9 +30,21 @@ function Navbar() {
             <NavLink to="/about" onClick={() => setOpen(false)}>About</NavLink>
             <Link to="/#how" onClick={() => setOpen(false)}>How it works</Link>
           </div>
-          <Link to="/sign-in" className="nav-cta" onClick={() => setOpen(false)}>
-            Sign in
-          </Link>
+          {user ? (
+            <button
+              className="nav-cta"
+              onClick={() => {
+                signOut();
+                setOpen(false);
+              }}
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link to="/sign-in" className="nav-cta" onClick={() => setOpen(false)}>
+              Sign in
+            </Link>
+          )}
         </div>
       </nav>
     </header>

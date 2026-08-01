@@ -718,3 +718,28 @@ footer .copyright { font-size: 0.8rem; color: var(--muted); }
     row-gap: 4px;
   }
 }
+
+.auth-error {
+  color: #FF8FA3;
+  font-size: 0.82rem;
+  margin-top: 14px;
+}
+
+.auth-switch {
+  display: block;
+  margin: 20px auto 0;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: center;
+}
+.auth-switch:hover { color: var(--paper); }
+
+button.nav-cta {
+  font-family: 'Inter', sans-serif;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
