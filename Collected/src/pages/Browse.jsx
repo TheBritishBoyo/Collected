@@ -14,8 +14,8 @@ function Browse() {
     async function fetchProducts() {
       setStatus("loading");
       const { data, error } = await supabase
-        .from("products")
-        .select("id, name, categories(name), listings(price, service_fee, in_stock)");
+        .from("public_product_listings")
+        .select("*");
 
       if (error) {
         console.error(error);
@@ -23,22 +23,15 @@ function Browse() {
         return;
       }
 
-      const shaped = data.map((p) => {
-        const inStockListings = p.listings.filter((l) => l.in_stock);
-        const cheapest = inStockListings.length
-          ? inStockListings.reduce((min, l) => (l.price < min.price ? l : min))
-          : null;
-
-        return {
-          id: p.id,
-          name: p.name,
-          category: p.categories?.name ?? "Uncategorized",
-          price: cheapest ? cheapest.price : null,
-          fee: cheapest ? cheapest.service_fee : 0,
-          sellerCount: p.listings.length,
-          stock: inStockListings.length ? "In stock" : "Out of stock",
-        };
-      });
+      const shaped = data.map((p) => ({
+        id: p.product_id,
+        name: p.product_name,
+        category: p.category_name ?? "Uncategorized",
+        price: p.price,
+        fee: p.service_fee,
+        sellerCount: p.seller_count,
+        stock: p.in_stock ? "In stock" : "Out of stock",
+      }));
 
       setProducts(shaped);
       setStatus("ready");

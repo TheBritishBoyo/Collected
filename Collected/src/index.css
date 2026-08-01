@@ -743,3 +743,11 @@ button.nav-cta {
   appearance: none;
   cursor: pointer;
 }
+
+.detail-summary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-top: 32px;
+}
