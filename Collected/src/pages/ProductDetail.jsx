@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
+import { useAuth } from "../context/AuthContext";
 
 function ProductDetail() {
   const { id } = useParams();
+  const { user } = useAuth();
   const [status, setStatus] = useState("loading");
   const [product, setProduct] = useState(null);
+  const [subscribed, setSubscribed] = useState(false);
+  const [subStatus, setSubStatus] = useState("idle");
 
   useEffect(() => {
     async function fetchProduct() {
@@ -28,6 +32,42 @@ function ProductDetail() {
 
     fetchProduct();
   }, [id]);
+
+  useEffect(() => {
+    async function checkSubscription() {
+      if (!user || !product) return;
+      const { data } = await supabase
+        .from("stock_notifications")
+        .select("id")
+        .eq("product_id", product.product_id)
+        .eq("user_id", user.id)
+        .maybeSingle();
+      setSubscribed(!!data);
+    }
+    checkSubscription();
+  }, [user, product]);
+
+  async function handleSubscribe() {
+    setSubStatus("loading");
+    const { error } = await supabase
+      .from("stock_notifications")
+      .insert({ product_id: product.product_id, user_id: user.id });
+
+    if (!error) setSubscribed(true);
+    setSubStatus("idle");
+  }
+
+  async function handleUnsubscribe() {
+    setSubStatus("loading");
+    const { error } = await supabase
+      .from("stock_notifications")
+      .delete()
+      .eq("product_id", product.product_id)
+      .eq("user_id", user.id);
+
+    if (!error) setSubscribed(false);
+    setSubStatus("idle");
+  }
 
   if (status === "loading") {
     return (
@@ -76,7 +116,41 @@ function ProductDetail() {
               </div>
             </>
           ) : (
-            <div className="compare">Currently out of stock across all verified sellers.</div>
+            <>
+              <div className="compare">Currently out of stock across all verified sellers.</div>
+
+              {!user && (
+                <Link to="/sign-in" className="btn-secondary" style={{ marginTop: "20px", display: "inline-block" }}>
+                  Sign in to get notified
+                </Link>
+              )}
+
+              {user && !subscribed && (
+                <button
+                  className="btn-primary"
+                  style={{ marginTop: "20px" }}
+                  disabled={subStatus === "loading"}
+                  onClick={handleSubscribe}
+                >
+                  {subStatus === "loading" ? "Please wait…" : "Notify me when back in stock"}
+                </button>
+              )}
+
+              {user && subscribed && (
+                <div style={{ marginTop: "20px" }}>
+                  <p className="cta-success" style={{ marginBottom: "10px" }}>
+                    You'll be notified when this is back in stock.
+                  </p>
+                  <button
+                    className="auth-switch"
+                    disabled={subStatus === "loading"}
+                    onClick={handleUnsubscribe}
+                  >
+                    Remove notification
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
