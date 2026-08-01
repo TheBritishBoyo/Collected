@@ -27,9 +27,9 @@ function Hero() {
         </div>
 
         <div className="binder">
-          <div className="slot s1"></div>
-          <div className="slot s2"></div>
-          <div className="slot s3"></div>
+          <div className="slot s1" aria-hidden="true"></div>
+          <div className="slot s2" aria-hidden="true"></div>
+          <div className="slot s3" aria-hidden="true"></div>
           <div className="price-card holo-border">
             <div className="pc-label">Booster Box · Sealed</div>
             <h3>Charizard ex Collection</h3>

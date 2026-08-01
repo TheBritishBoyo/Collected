@@ -579,3 +579,142 @@ footer .copyright { font-size: 0.8rem; color: var(--muted); }
   font-size: 0.92rem;
   max-width: 60ch;
 }
+
+/* Sticky-header-aware anchor scrolling */
+[id] {
+  scroll-margin-top: 90px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Auth / contact forms */
+.auth-section { padding-top: 60px; }
+.auth-wrap { display: flex; justify-content: center; }
+.auth-box {
+  max-width: 440px;
+  width: 100%;
+  padding: 44px 36px;
+  border-radius: 20px;
+  background: var(--surface);
+}
+.auth-box h2 { font-size: 1.6rem; margin-bottom: 12px; }
+.auth-box > p { color: var(--muted); font-size: 0.92rem; margin-bottom: 28px; }
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.auth-form label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 14px;
+}
+.auth-form input,
+.auth-form textarea {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  resize: vertical;
+}
+.auth-form input:focus,
+.auth-form textarea:focus { border-color: var(--holo-2); }
+.auth-form button { margin-top: 22px; }
+
+/* Product detail page */
+.back-link {
+  display: inline-block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 24px;
+}
+.back-link:hover { color: var(--paper); }
+.detail-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 40px;
+  margin-top: 32px;
+}
+.detail-summary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  height: fit-content;
+}
+.detail-summary .amount {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 2rem;
+  color: var(--gold);
+}
+.detail-summary .compare {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.listings-panel h3 {
+  font-size: 1.05rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.listings-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.listing {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr 0.8fr 0.6fr auto;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  padding: 14px 18px;
+  font-size: 0.85rem;
+}
+.listing.cheapest {
+  background: var(--surface-2);
+}
+.listing-price {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--gold);
+  text-align: right;
+}
+.listing-badge {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--holo-3);
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+@media (max-width: 800px) {
+  .detail-grid { grid-template-columns: 1fr; }
+  .listing {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4px;
+  }
+}

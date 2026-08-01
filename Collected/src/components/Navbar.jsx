@@ -26,9 +26,11 @@ function Navbar() {
           <div className="nav-links">
             <NavLink to="/browse" onClick={() => setOpen(false)}>Browse</NavLink>
             <NavLink to="/about" onClick={() => setOpen(false)}>About</NavLink>
-            <a href="/#how" onClick={() => setOpen(false)}>How it works</a>
+            <Link to="/#how" onClick={() => setOpen(false)}>How it works</Link>
           </div>
-          <a href="#" className="nav-cta" onClick={() => setOpen(false)}>Sign in</a>
+          <Link to="/sign-in" className="nav-cta" onClick={() => setOpen(false)}>
+            Sign in
+          </Link>
         </div>
       </nav>
     </header>
